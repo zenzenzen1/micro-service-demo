@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "ApiGatewayApplication",
+            "request": "launch",
+            "mainClass": "com.example.api_gateway.ApiGatewayApplication",
+            "projectName": "api_gateway"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ProfileServiceApplication<profile_service>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.profile_service.ProfileServiceApplication",
+            "projectName": "profile_service",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

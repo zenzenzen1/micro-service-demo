@@ -1,0 +1,1 @@
+docker run -d --name neo4j-db -e NEO4J_AUTH=neo4j/12345678 -p 7474:7474 -p 7687:7687 neo4j:latest
