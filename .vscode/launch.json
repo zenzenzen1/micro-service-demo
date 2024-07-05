@@ -2,6 +2,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "org.example.Main",
+            "projectName": "identity-service"
+        },
+        {
+            "type": "java",
+            "name": "IdentityServiceApplication",
+            "request": "launch",
+            "mainClass": "org.example.identityservice.IdentityServiceApplication",
+            "projectName": "identity-service"
+        },
+        {
+            "type": "java",
             "name": "ApiGatewayApplication",
             "request": "launch",
             "mainClass": "com.example.api_gateway.ApiGatewayApplication",

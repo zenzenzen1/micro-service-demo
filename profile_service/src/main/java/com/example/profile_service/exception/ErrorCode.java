@@ -1,4 +1,4 @@
-package org.example.identityservice.exception;
+package com.example.profile_service.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;

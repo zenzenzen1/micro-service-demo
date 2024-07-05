@@ -37,7 +37,7 @@ public class UserController {
         return userProfileClient.getUserProfile(userId);
     }
 
-    @PostMapping
+    @PostMapping({"/registration"})
     public ApiResponse<User> createUser(@RequestBody @Valid UserCreationRequest request) {
         ApiResponse<User> response = new ApiResponse<>();
         response.setResult(userService.createUser(request));

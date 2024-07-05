@@ -1,5 +1,7 @@
 package com.example.profile_service.controller;
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,11 +15,18 @@ import com.example.profile_service.service.UserProfileService;
 
 import lombok.RequiredArgsConstructor;
 
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping({"/user"})
 public class UserProfileController {
     private final UserProfileService userProfileService;
+    
+    @GetMapping()
+    public List<UserProfileResponse> getUserProfiles() {
+        return userProfileService.getUserProfiles();
+    }
+    
     
     @PostMapping({"", "/"})
     public UserProfileResponse createUserProfile(@RequestBody UserProfileCreationRequest request) {

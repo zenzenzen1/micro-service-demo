@@ -1,8 +1,7 @@
-package org.example.identityservice.configuration;
+package com.example.profile_service.configuration;
 
 import java.text.ParseException;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtException;
@@ -12,8 +11,6 @@ import com.nimbusds.jwt.SignedJWT;
 
 @Component
 public class CustomJwtDecoder implements JwtDecoder {
-    @Value("${jwt.signerKey}")
-    private String signerKey;
 
     // @Autowired
     // private AuthenticationService authenticationService;
@@ -46,6 +43,7 @@ public class CustomJwtDecoder implements JwtDecoder {
 
         try {
             SignedJWT signedJWT = SignedJWT.parse(token);
+            System.out.println("Token: " + token);
             return new Jwt(
                     token,
                     signedJWT.getJWTClaimsSet().getIssueTime().toInstant(),

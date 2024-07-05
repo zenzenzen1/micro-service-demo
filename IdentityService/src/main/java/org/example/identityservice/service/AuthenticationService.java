@@ -24,6 +24,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jose.JWSAlgorithm;
@@ -191,12 +192,15 @@ public class AuthenticationService {
                 " ",
                 user.getRoles().stream()
                         .map(r -> {
-                            return r.getName() + " "
-                                    + String.join(
-                                            " ",
-                                            r.getPermissions().stream()
-                                                    .map(p -> p.getName())
-                                                    .toArray(String[]::new));
+                            return r.getName()
+                                    + (CollectionUtils.isEmpty(r.getPermissions())
+                                            ? ""
+                                            : " "
+                                                    + String.join(
+                                                            " ",
+                                                            r.getPermissions().stream()
+                                                                    .map(p -> p.getName())
+                                                                    .toArray(String[]::new)));
                         })
                         .toArray(String[]::new));
 

@@ -49,7 +49,7 @@ public class UserService {
         user = userMapper.toUser(request);
 
         HashSet<org.example.identityservice.entity.Role> roles = new HashSet<>();
-        roleRepository.findById(Role.ADMIN.name()).ifPresent(roles::add);
+        roleRepository.findById(Role.USER.name()).ifPresent(roles::add);
         user.setRoles(roles);
         user = userRepository.save(user);
 

@@ -1,3 +1,5 @@
+server.port: 8080
+
 spring:
   application:
     name: IdentityService
@@ -26,4 +28,4 @@ jwt:
   refreshable-duration: 1200 # seconds
 app:
   services:
-    userProfile: "http://localhost:8081/userProfile"
+    userProfile: "http://localhost:8081/user-profile"

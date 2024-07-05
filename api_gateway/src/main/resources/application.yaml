@@ -1,0 +1,29 @@
+# spring.application.name=api_gateway
+# server.port=8082
+
+app:
+  api-prefix: /api/v1
+
+server:
+  port: 8082
+spring:
+  application:
+    name: api_gateway
+  cloud:
+    gateway:
+      routes:
+        - id: identity_service
+          uri: http://localhost:8080
+          predicates:
+            - Path=${app.api-prefix}/identity/**
+          filters:
+            - StripPrefix=2
+        - id: user_profile_service
+          uri: http://localhost:8081
+          predicates:
+            - Path=${app.api-prefix}/user-profile/**
+          filters:
+            - StripPrefix=2
+# spring.cloud.gateway.routes[0].id=identity_service
+# spring.cloud.gateway.routes[0].uri=https://loclahost:8080
+# spring.cloud.gateway.routes[0].predicates[0]=Path=/red/{segment},/blue/{segment}

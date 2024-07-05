@@ -1,5 +1,8 @@
 package com.example.profile_service.service;
 
+import java.util.List;
+
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import com.example.profile_service.dto.request.UserProfileCreationRequest;
@@ -24,5 +27,10 @@ public class UserProfileService {
     public UserProfileResponse getUserProfile(String userId) {
         UserProfile userProfile = userProfileRepository.findById(userId).orElseThrow(() -> new RuntimeException("User profile not found"));
         return userProfileMapper.toUserProfileResponse(userProfile);
+    }
+    
+    @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
+    public List<UserProfileResponse> getUserProfiles() {
+        return userProfileRepository.findAll().stream().map(userProfileMapper::toUserProfileResponse).toList();
     }
 }
