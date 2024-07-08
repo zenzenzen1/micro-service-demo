@@ -13,11 +13,9 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
-    @SuppressWarnings("unused")
-    private final String[] PUBLIC_END_POINTS = {
-        "/users", "/auth/token", "/auth/introspect", "/auth/logout", "/auth/refreshToken", "/users/registration"
+    private final String[] PUBLIC_POST_END_POINTS = {
+        "/user"
     };
-
 
     @Autowired
     private CustomJwtDecoder customJwtDecoder;
@@ -26,6 +24,7 @@ public class SecurityConfig {
     SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(
                 request -> request
+                .requestMatchers(PUBLIC_POST_END_POINTS).permitAll()
                     .anyRequest()
                     .authenticated()
                 );
@@ -36,6 +35,7 @@ public class SecurityConfig {
         // );
         httpSecurity.csrf(AbstractHttpConfigurer::disable);
         return httpSecurity.build();
+        
     }
 
     // @Bean

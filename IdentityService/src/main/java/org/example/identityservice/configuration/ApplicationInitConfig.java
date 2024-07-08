@@ -46,16 +46,6 @@ public class ApplicationInitConfig {
                     userRepository.save(user);
                     log.warn("Admin user has been created with default password: admin");
                 }
-                if (userRepository.findByUsername("user1").isEmpty()) {
-                    var roles = new HashSet<Role>();
-                    roles.add(userRole);
-                    User user = User.builder()
-                            .username("user1")
-                            .password(passwordEncoder.encode("123"))
-                            .roles(roles)
-                            .build();
-                    userRepository.save(user);
-                }
             }
         };
     }

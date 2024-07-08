@@ -55,6 +55,12 @@ public class UserService {
 
         var profileRequest = userProfileMapper.toUserProfileCreationRequest(request);
         profileRequest.setUserId(user.getId());
+
+        // ServletRequestAttributes servletRequestAttributes =
+        //         (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        // var authHeader = servletRequestAttributes.getRequest().getHeader("Authorization");
+        // log.info("Auth header: {}", authHeader);
+
         var profileResponse = userProfileClient.createUserProfile(profileRequest);
         log.info("Profile created: {}", profileResponse);
 
@@ -77,6 +83,9 @@ public class UserService {
 
     public UserResponse getUserInfo() {
         SecurityContext context = SecurityContextHolder.getContext();
+        context.getAuthentication().getAuthorities().forEach(grantedAuthority -> {
+            log.warn("Authority: {}", grantedAuthority.getAuthority());
+        });
         String name = context.getAuthentication().getName();
         log.warn("{} logging", name);
         User user = userRepository.findByUsername(name).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
